@@ -8,7 +8,7 @@ using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 
-namespace Nejire.Services
+namespace Nejire
 {
     public class CommandManager
     {
@@ -50,7 +50,7 @@ namespace Nejire.Services
             var Result = await _Commands.ExecuteAsync(Context, ArgPos, null);
             if (!Result.IsSuccess && Result.Error != CommandError.UnknownCommand)
             {
-                Console.WriteLine($"{DateTime.Now} | Usou o comando: {_Commands.Search(Context, ArgPos).Commands[0].Command.Name}");
+                //Console.WriteLine($"{DateTime.Now} | Usou o comando: {_Commands.Search(Context, ArgPos).Commands[0].Command.Name}");
                 var embed = new EmbedBuilder();
 
                 if (Result.ErrorReason == "O texto de entrada tem muitos parâmetros!")
@@ -59,7 +59,7 @@ namespace Nejire.Services
                 }
                 else
                 {
-                    embed.WithDescription(Result.ErrorReason);
+                    embed.WithDescription("Ocorreu um erro:" + Result.ErrorReason);
                 }
 
                 await Context.Channel.SendMessageAsync(embed: embed.Build());
