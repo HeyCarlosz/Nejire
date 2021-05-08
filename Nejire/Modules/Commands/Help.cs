@@ -24,7 +24,7 @@ namespace Nejire.Modules.Commands
         [Summary("Exive todos os comandos do bot.")]
         [RequireBotPermission(GuildPermission.SendMessages)]
         [RequireBotPermission(GuildPermission.EmbedLinks)]
-        public async Task HelpCmd(string command = "")
+        public async Task HelpCmd([Remainder] string command = "")
         {
             string prefix = Config.Nejire.Prefix;
             if (command == "")
@@ -33,7 +33,7 @@ namespace Nejire.Modules.Commands
                     .WithColor(new Color(255, 0, 255))
                     //.WithAuthor(Context.User.Username, Context.User.GetAvatarUrl())
                     .WithThumbnailUrl(Context.User.GetAvatarUrl())
-                    .WithTitle("Categoria de comandos!")
+                    .WithTitle("Lista de Comandos!")
                     .WithCurrentTimestamp();
 
                 foreach (var module in _Services.Modules)

@@ -1,5 +1,6 @@
 ﻿using Discord;
 using Discord.Commands;
+using Discord.WebSocket;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace Nejire.Modules.Commands
 {
     public class Util : ModuleBase<SocketCommandContext>
     {
+
         [Command("ping")]
         [Alias("pong")]
         [Summary("Verifica a latência do bot!")]
@@ -19,12 +21,20 @@ namespace Nejire.Modules.Commands
             await Context.Channel.SendMessageAsync($"Ping é {Context.Client.Latency}");
         }
 
-        [Command("teste")]
-        [Alias("a")]
-        [Summary("Verifica a latência do bot!")]
-        public async Task TesteCommand()
+        [Command("avatar")]
+        [Alias("pic", "photo", "av")]
+        [Summary("Ver a foto do perfil de um usuário.")]
+        public async Task AvatarCommand()
         {
-            await Context.Channel.SendMessageAsync($"Ping é {Context.Client.Latency}");
+
+            string avataruser;
+            avataruser = Context.User.GetAvatarUrl(ImageFormat.Auto, 2048);
+
+            await Context.Channel.SendMessageAsync(embed: new EmbedBuilder()
+                .WithColor(new Color(255, 0, 255))
+                .WithAuthor("Avatar de " + Context.User.Username, avataruser)
+                .WithImageUrl(avataruser)
+                .Build());
         }
     }
 }
