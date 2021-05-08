@@ -53,8 +53,8 @@ namespace Nejire
 
         public async Task MainAsync()
         {
-            await new CommandManager(Services).InitAsync();
             await new EventManager(Services).InitAsync();
+            await new CommandManager(Services).InitAsync();
 
             if (Config.Nejire.Token == "" || Config.Nejire.Token == null) return;
             await Client.LoginAsync(TokenType.Bot, Config.Nejire.Token);
